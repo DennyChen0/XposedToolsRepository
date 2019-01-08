@@ -1,0 +1,21 @@
+通过命令行执行adb shell am broadcast发送广播通知。
+adb shell am broadcast 后面的参数有：
+[-a <ACTION>]
+[-d <DATA_URI>]
+[-t <MIME_TYPE>] 
+[-c <CATEGORY> [-c <CATEGORY>] ...] 
+[-e|--es <EXTRA_KEY> <EXTRA_STRING_VALUE> ...] 
+[--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE> ...] 
+[-e|--ei <EXTRA_KEY> <EXTRA_INT_VALUE> ...] 
+[-n <COMPONENT>]
+[-f <FLAGS>] [<URI>]
+
+例如：
+
+adb shell am broadcast -a py.invoke --es pid "12345566"
+以上命令的后面还可接参数，类型按照上面的说明
+
+void onReceive(final Context arg0, Intent arg1){
+arg1.getAction() //对应接收到的action是"py.invoke"
+String hid = arg1.getStringExtra(PID);//上面命令的最后接了个参数，类型 --es 表示字符串，pid是getStringExtra的PID的作用，获得值是12345566，
+}
